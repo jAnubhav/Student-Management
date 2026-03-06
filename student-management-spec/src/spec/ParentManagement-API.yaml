@@ -1,8 +1,8 @@
 openapi: 3.0.3
 
 info:
-  title: Student Management API
-  description: API for managing student lifecycle including creation and retrieval of student records.
+  title: Parent Management API
+  description: API for managing parent information associated with students including creation and retrieval.
   version: 1.0.0
 
 servers:
@@ -10,36 +10,34 @@ servers:
     description: Local development server environment for testing and development purposes.
 
 tags:
-  - name: Student
-    description: Operations related to student lifecycle management including creation and retrieval.
+  - name: Parent
+    description: Operations related to managing parent information associated with students.
 
 paths:
-  /student:
+  /parent:
     post:
-      summary: Create a new student
-      operationId: createStudent
-      description: Creates a new student record along with associated parent details after performing request validation and business rule verification.
+      summary: Create a new parent record
+      operationId: createParent
+      description: Creates a new parent record in the system after validating the input data and ensuring it meets all required criteria.
       tags:
-        - Student
+        - Parent
 
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '../model/student/CreateStudentRequest.yaml'
+              $ref: '../model/parent/CreateParentRequest.yaml'
             examples:
-              sampleStudent:
-                summary: Valid student creation request
+              sampleParent:
+                summary: Valid parent creation request
                 value:
-                  firstName: "Arjun"
-                  lastName: "Sharma"
-                  email: "arjun.sharma@example.com"
-                  phoneNumber: "9876543210"
-                  department: "COMPUTER_SCIENCE"
-                  gender: "M"
-                  dateOfBirth: "2005-08-15"
-                  parentId: "220001"
+                  fatherName: "Ramesh Sharma"
+                  fatherEmail: "ramesh.sharma@example.com"
+                  fatherPhoneNumber: "9876543211"
+                  motherName: "Sunita Sharma"
+                  motherEmail: "sunita.sharma@example.com"
+                  motherPhoneNumber: "9876543212"
                   address: "Flat No. 12B, Sri Lakshmi Apartments, MG Road"
                   city: "Chennai"
                   state: "Tamil Nadu"
@@ -47,19 +45,18 @@ paths:
 
       responses:
         '201':
-          description: Student record was successfully validated, created, and persisted in the system.
+          description: Parent record was successfully validated, created, and persisted in the system.
           content:
             application/json:
               schema:
-                $ref: '../model/student/CreateStudentResponse.yaml'
+                $ref: '../model/parent/CreateParentResponse.yaml'
               examples:
                 success:
                   summary: Successful creation
                   value:
                     requestStatus: "SUCCESS"
-                    studentDetails:
-                      enrollmentNumber: "CS220001"
-                      dateOfEnrollment: "2024-09-01"
+                    parentDetails:
+                      parentId: "220001"
 
         '400':
           description: The request could not be processed due to validation failures, malformed input data, or missing required attributes.
@@ -74,27 +71,27 @@ paths:
                     requestStatus: "FAILURE"
                     errors:
                       - type: "INVALID_PARAMETER"
-                        errorParameter: "phoneNumber"
-                        message: "Phone number must contain exactly 10 digits."
+                        errorParameter: "fatherPhoneNumber"
+                        message: "Father's phone number must contain exactly 10 digits."
                       - type: "INVALID_PARAMETER"
-                        errorParameter: "email"
-                        message: "Email must be a valid email address."
+                        errorParameter: "motherEmail"
+                        message: "Mother's email must be a valid email address."
 
         '409':
-          description: The request could not be completed because of a resource conflict such as attempting to create a duplicate student record.
+          description: The request could not be completed because of a resource conflict such as attempting to create a duplicate parent record.
           content:
             application/json:
               schema:
                 $ref: '../model/common/Utility.yaml#/components/schemas/FailureResponse'
               examples:
                 conflictError:
-                  summary: Duplicate student
+                  summary: Duplicate parent
                   value:
                     requestStatus: "FAILURE"
                     errors:
                       - type: "CONFLICT"
-                        errorParameter: "enrollmentNumber"
-                        message: "A student with this enrollment number already exists."
+                        errorParameter: "parentId"
+                        message: "A parent with this ID already exists."
 
         '500':
           description: An unexpected internal server error occurred while processing the request and is not related to client input.
@@ -126,65 +123,50 @@ paths:
                       - type: "SERVICE_UNAVAILABLE"
                         message: "The service is temporarily unavailable due to maintenance or high load."
 
-  /student/{enrollmentNumber}:
+  /parent/{parentId}:
     get:
-      summary: Retrieve student details by enrollment number
-      operationId: getStudentById
-      description: Fetches the details of a student record based on the provided unique identifier after validating the input and ensuring the record exists.
+      summary: Retrieve parent details by parent ID
+      operationId: getParentById
+      description: Fetches the details of a parent record based on the provided unique identifier after validating the input and ensuring the record exists.
       tags:
-        - Student
+        - Parent
 
       parameters:
-        - name: enrollmentNumber
+        - name: parentId
           in: path
           required: true
-          description: Unique identifier of the student to be retrieved.
+          description: Unique identifier of the parent to be retrieved.
           schema:
             type: string
-            example: "CS220001"
+            example: "220001"
 
       responses:
         '200':
-          description: Student record was successfully retrieved and returned in the response body.
+          description: Parent record was successfully retrieved and returned in the response body.
           content:
             application/json:
               schema:
-                $ref: '../model/student/StudentDetailsResponse.yaml'
+                $ref: '../model/parent/ParentDetailsResponse.yaml'
               examples:
                 success:
-                  summary: Student details retrieved successfully
+                  summary: Parent details retrieved successfully
                   value:
                     requestStatus: "SUCCESS"
-                    studentDetails:
-                      enrollmentNumber: "CS220001"
-                      dateOfEnrollment: "2024-09-01"
-                      status: "ACTIVE"
+                    parentDetails:
+                      parentId: "220001"
+                      fatherName: "Ramesh Sharma"
+                      fatherEmail: "ramesh.sharma@example.com"
+                      fatherPhoneNumber: "9876543211"
+                      motherName: "Sunita Sharma"
+                      motherEmail: "sunita.sharma@example.com"
+                      motherPhoneNumber: "9876543212"
                       address: "Flat No. 12B, Sri Lakshmi Apartments, MG Road"
                       city: "Chennai"
                       state: "Tamil Nadu"
                       zipcode: "600034"
-                      firstName: "Arjun"
-                      lastName: "Sharma"
-                      email: "arjun.sharma@example.com"
-                      phoneNumber: "9876543210"
-                      department: "COMPUTER_SCIENCE"
-                      gender: "M"
-                      dateOfBirth: "2005-08-15"
-                      parentDetails:
-                        parentId: "220001"
-                        fatherName: "Ramesh Sharma"
-                        fatherEmail: "ramesh.sharma@example.com"
-                        fatherPhoneNumber: "9876543211"
-                        motherName: "Sunita Sharma"
-                        motherEmail: "sunita.sharma@example.com"
-                        motherPhoneNumber: "9876543212"
-                        address: "Flat No. 12B, Sri Lakshmi Apartments, MG Road"
-                        city: "Chennai"
-                        state: "Tamil Nadu"
-                        zipcode: "600034"
 
         '400':
-          description: The request could not be processed due to validation failures or malformed enrollment number format.
+          description: The request could not be processed due to validation failures, malformed input data, or missing required attributes.
           content:
             application/json:
               schema:
@@ -196,23 +178,23 @@ paths:
                     requestStatus: "FAILURE"
                     errors:
                       - type: "INVALID_PARAMETER"
-                        errorParameter: "enrollmentNumber"
-                        message: "Enrollment number must be in valid format."
+                        errorParameter: "parentId"
+                        message: "Parent ID must be in valid format."
 
         '404':
-          description: The specified student record was not found in the system.
+          description: The specified parent record was not found in the system.
           content:
             application/json:
               schema:
                 $ref: '../model/common/Utility.yaml#/components/schemas/FailureResponse'
               examples:
                 notFound:
-                  summary: Student record not found
+                  summary: Parent record not found
                   value:
                     requestStatus: "FAILURE"
                     errors:
                       - type: "NOT_FOUND"
-                        message: "No student record found with the provided enrollment number."
+                        message: "No parent record found with the provided parent ID."
 
         '500':
           description: An unexpected internal server error occurred while processing the request and is not related to client input.

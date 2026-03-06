@@ -1,14 +1,13 @@
 title: ParentDetailsResponse
 description: Represents the response returned when retrieving detailed information about a parent or guardian, including their personal details and contact information.
 allOf:
-  - $ref: '../common/Utility.yaml#/components/schemas/Status'
+  - $ref: '../common/Utility.yaml#/components/schemas/RequestStatus'
   - type: object
     properties:
       parentDetails:
         description: Contains the details of the parent record, including the assigned parent ID, personal details, and contact information.
         allOf:
-          - $ref: './ParentAssigned.yaml#/components/schemas/ParentAssigned'
-          - $ref: './CreateParentRequest.yaml'
+          - $ref: './ParentDetails.yaml'
 
 example:
   success:

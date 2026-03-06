@@ -1,7 +1,7 @@
 title: CreateStudentResponse
 description: Represents the response returned after attempting to create a student record.
 allOf:
-  - $ref: '../common/Utility.yaml#/components/schemas/Status'
+  - $ref: '../common/Utility.yaml#/components/schemas/RequestStatus'
   - type: object
     properties:
       studentDetails:

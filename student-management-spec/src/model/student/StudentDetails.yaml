@@ -1,0 +1,38 @@
+title: StudentDetails
+description: Represents the complete details of a student, combining enrollment metadata, personal information, and associated parent details.
+allOf:
+  - $ref: './StudentAssigned.yaml#/components/schemas/StudentResponseMetadata'
+  - $ref: './StudentConfigured.yaml'
+  - type: object
+    properties:
+      parentDetails:
+        description: Contains the details of the parent or guardian associated with the student, including their personal details and contact information.
+        $ref: '../parent/ParentDetails.yaml'
+
+example:
+  enrollmentNumber: "CS220001"
+  dateOfEnrollment: "2024-09-01"
+  status: "ACTIVE"
+  address: "Flat No. 12B, Sri Lakshmi Apartments, MG Road"
+  city: "Chennai"
+  state: "Tamil Nadu"
+  zipcode: "600034"
+  firstName: "Arjun"
+  lastName: "Sharma"
+  email: "arjun.sharma@example.com"
+  phoneNumber: "9876543210"
+  department: "COMPUTER_SCIENCE"
+  gender: "M"
+  dateOfBirth: "2005-08-15"
+  parentDetails:
+    parentId: "220001"
+    fatherName: "Ramesh Sharma"
+    fatherEmail: "ramesh.sharma@example.com"
+    fatherPhoneNumber: "9876543211"
+    motherName: "Sunita Sharma"
+    motherEmail: "sunita.sharma@example.com"
+    motherPhoneNumber: "9876543212"
+    address: "Flat No. 12B, Sri Lakshmi Apartments, MG Road"
+    city: "Chennai"
+    state: "Tamil Nadu"
+    zipcode: "600034"

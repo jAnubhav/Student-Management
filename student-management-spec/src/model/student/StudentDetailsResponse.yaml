@@ -1,20 +1,13 @@
 title: StudentDetailsResponse
 description: Represents the response returned when retrieving detailed information about a student, including their personal details, associated parent information, and enrollment details.
 allOf:
-  - $ref: '../common/Utility.yaml#/components/schemas/Status'
+  - $ref: '../common/Utility.yaml#/components/schemas/RequestStatus'
   - type: object
     properties:
       studentDetails:
         description: Contains the details of the student record, including the assigned enrollment number, personal details, contact information, and associated parent information.
         allOf:
-          - $ref: './StudentAssigned.yaml#/components/schemas/StudentResponseMetadata'
-          - $ref: './StudentConfigured.yaml'
-          - type: object
-            properties:
-              parentDetails:
-                description: Contains the details of the parent or guardian associated with the student, including their personal details and contact information.
-                allOf:
-                  - $ref: '../parent/ParentDetailsResponse.yaml'
+          - $ref: './StudentDetails.yaml'
 
 example:
   success:

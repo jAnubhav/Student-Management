@@ -1,6 +1,6 @@
 components:
   schemas:
-    Status:
+    RequestStatus:
       description: Represents the status of a request or operation, indicating whether it was successful or if it encountered an error.
       type: object
       required:
@@ -28,7 +28,7 @@ components:
     FailureResponse:
       description: Represents the response metadata that includes a status and an array of error details, typically used for API responses that indicate the success or failure of an operation along with any relevant error information.
       allOf:
-        - $ref: '#/components/schemas/Status'
+        - $ref: '#/components/schemas/RequestStatus'
         - type: object
           required:
             - errors
