@@ -1,0 +1,22 @@
+# Library type
+library: spring-boot
+
+# Package structure
+apiPackage: org.anubhav.api
+modelPackage: org.anubhav.model
+
+# Generation options
+interfaceOnly: true
+skipDefaultInterface: true
+useSpringBoot3: true
+useTags: true
+dateLibrary: java21
+
+# Documentation
+documentationProvider: none
+
+# Disable test generation
+generateApiTests: false
+generateModelTests: false
+
+apiNameSuffix: ManagementInterface

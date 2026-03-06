@@ -7,6 +7,11 @@
     <groupId>org.anubhav</groupId>
     <artifactId>student-management</artifactId>
     <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>student-management-spec</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
