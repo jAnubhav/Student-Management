@@ -1,0 +1,19 @@
+title: CreateStudentResponse
+description: Represents the response returned after attempting to create a student record.
+allOf:
+  - $ref: '../common/Utility.yaml#/components/schemas/Status'
+  - type: object
+    properties:
+      studentDetails:
+        allOf:
+          - $ref: './StudentAssigned.yaml#/components/schemas/StudentAssigned'
+        description: Contains the details of the student record that was created, including the assigned enrollment number and date of enrollment.
+
+example:
+  success:
+    summary: Student successfully created
+    value:
+      requestStatus: "SUCCESS"
+      studentDetails:
+        enrollmentNumber: "CS220001"
+        dateOfEnrollment: "2024-09-01"

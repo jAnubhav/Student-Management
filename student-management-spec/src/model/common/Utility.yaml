@@ -1,0 +1,95 @@
+components:
+  schemas:
+    Status:
+      description: Represents the status of a request or operation, indicating whether it was successful or if it encountered an error.
+      type: object
+      required:
+        - requestStatus
+      properties:
+        requestStatus:
+          type: string
+          description: Indicates the outcome of the API operation.
+          enum:
+            - "SUCCESS"
+            - "FAILURE"
+          example: "SUCCESS"
+
+      example:
+        success:
+          summary: Operation successful
+          value:
+            requestStatus: "SUCCESS"
+
+        failure:
+          summary: Operation failed
+          value:
+            requestStatus: "FAILURE"
+
+    FailureResponse:
+      description: Represents the response metadata that includes a status and an array of error details, typically used for API responses that indicate the success or failure of an operation along with any relevant error information.
+      allOf:
+        - $ref: '#/components/schemas/Status'
+        - type: object
+          required:
+            - errors
+          properties:
+            requestStatus:
+              type: string
+              description: Indicates only the failure status of the API operation, as this schema is typically used for error responses.
+              enum:
+                - "FAILURE"
+              example: "FAILURE"
+
+            errors:
+              type: array
+              description: List of error details if the operation failed due to validation or processing issues.
+              items:
+                $ref: 'ErrorDetail.yaml'
+              example:
+                validationFailure:
+                  summary: Operation failed due to validation errors
+                  value:
+                    - type: "INVALID_PARAMETER"
+                      errorParameter: "phoneNumber"
+                      message: "Phone number must contain exactly 10 digits."
+                    - type: "INVALID_PARAMETER"
+                      errorParameter: "email"
+                      message: "Email must be a valid email address."
+
+      example:
+        validationFailure:
+          summary: Creation failed due to validation errors
+          value:
+            requestStatus: "FAILURE"
+            errors:
+              - type: "INVALID_PARAMETER"
+                errorParameter: "phoneNumber"
+                message: "Phone number must contain exactly 10 digits."
+              - type: "INVALID_PARAMETER"
+                errorParameter: "email"
+                message: "Email must be a valid email address."
+
+        conflictFailure:
+          summary: Creation failed due to a conflict
+          value:
+            requestStatus: "FAILURE"
+            errors:
+              - type: "CONFLICT"
+                errorParameter: "enrollmentNumber"
+                message: "A student with this enrollment number already exists."
+
+        serverError:
+          summary: Creation failed due to internal server error
+          value:
+            requestStatus: "FAILURE"
+            errors:
+              - type: "INTERNAL_SERVER_ERROR"
+                message: "An unexpected error occurred. Please try again later."
+
+        serviceUnavailable:
+          summary: Creation failed due to service unavailability
+          value:
+            requestStatus: "FAILURE"
+            errors:
+              - type: "SERVICE_UNAVAILABLE"
+                message: "The service is temporarily unavailable due to maintenance or high load."

@@ -1,0 +1,28 @@
+title: CreateParentRequest
+description: Represents the request body for creating a new parent or guardian record in the student management system. All required fields must be provided to ensure complete parent information.
+allOf:
+  - $ref: './ParentConfigured.yaml'
+  - type: object
+    required:
+      - fatherName
+      - fatherEmail
+      - fatherPhoneNumber
+      - motherName
+      - motherEmail
+      - motherPhoneNumber
+      - address
+      - city
+      - state
+      - zipcode
+
+example:
+  fatherName: "Ramesh Sharma"
+  fatherEmail: "ramesh.sharma@example.com"
+  fatherPhoneNumber: "9876543211"
+  motherName: "Sunita Sharma"
+  motherEmail: "sunita.sharma@example.com"
+  motherPhoneNumber: "9876543212"
+  address: "Flat No. 12B, Sri Lakshmi Apartments, MG Road"
+  city: "Chennai"
+  state: "Tamil Nadu"
+  zipcode: "600034"

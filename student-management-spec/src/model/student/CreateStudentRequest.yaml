@@ -1,0 +1,39 @@
+title: CreateStudentRequest
+description: Represents the request body for creating a new student in the student management system where all fields are mandatory to ensure complete and valid student data.
+allOf:
+  - $ref: './StudentConfigured.yaml'
+  - type: object
+    required:
+      - firstName
+      - lastName
+      - email
+      - phoneNumber
+      - department
+      - gender
+      - dateOfBirth
+      - parentId
+      - address
+      - city
+      - state
+      - zipcode
+    properties:
+      parentId:
+        type: string
+        description: Unique identifier of the parent associated with the student.
+        minLength: 6
+        maxLength: 6
+        example: "220001"
+
+example:
+  address: "Flat No. 12B, Sri Lakshmi Apartments, MG Road"
+  city: "Chennai"
+  state: "Tamil Nadu"
+  zipcode: "600034"
+  firstName: "Arjun"
+  lastName: "Sharma"
+  email: "arjun.sharma@example.com"
+  phoneNumber: "9876543210"
+  department: "COMPUTER_SCIENCE"
+  gender: "M"
+  dateOfBirth: "2005-08-15"
+  parentId: "220001"

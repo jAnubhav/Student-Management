@@ -1,0 +1,18 @@
+title: CreateParentResponse
+description: Represents the response body for the create parent API endpoint.
+allOf:
+  - $ref: '../common/Utility.yaml#/components/schemas/Status'
+  - type: object
+    properties:
+      parentDetails:
+        allOf:
+          - $ref: './ParentAssigned.yaml#/components/schemas/ParentAssigned'
+        description: Contains the details of the parent record that was created, including the assigned parent ID
+
+example:
+  success:
+    summary: Parent successfully created
+    value:
+      requestStatus: "SUCCESS"
+      parentDetails:
+        parentId: "220001"

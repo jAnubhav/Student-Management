@@ -1,0 +1,55 @@
+title: ParentConfigured
+description: Represents the basic parent or guardian information associated with a student, including contact and address details for father and mother.
+allOf:
+  - $ref: '../common/Address.yaml'
+  - type: object
+    properties:
+      fatherName:
+        type: string
+        description: Full name of the father or male guardian of the student.
+        example: "Ramesh Sharma"
+
+      fatherEmail:
+        type: string
+        format: email
+        description: Email address of the father or male guardian. Must be a valid email format.
+        example: "ramesh.sharma@example.com"
+
+      fatherPhoneNumber:
+        type: string
+        description: Contact phone number of the father or male guardian. Must contain exactly 10 numeric digits.
+        minLength: 10
+        maxLength: 10
+        pattern: '^[0-9]{10}$'
+        example: "9876543211"
+
+      motherName:
+        type: string
+        description: Full name of the mother or female guardian of the student.
+        example: "Sunita Sharma"
+
+      motherEmail:
+        type: string
+        format: email
+        description: Email address of the mother or female guardian. Must be a valid email format.
+        example: "sunita.sharma@example.com"
+
+      motherPhoneNumber:
+        type: string
+        description: Contact phone number of the mother or female guardian. Must contain exactly 10 numeric digits.
+        minLength: 10
+        maxLength: 10
+        pattern: '^[0-9]{10}$'
+        example: "9876543212"
+
+example:
+  address: "Flat No. 12B, Sri Lakshmi Apartments, MG Road"
+  city: "Chennai"
+  state: "Tamil Nadu"
+  zipcode: "600034"
+  fatherName: "Ramesh Sharma"
+  fatherEmail: "ramesh.sharma@example.com"
+  fatherPhoneNumber: "9876543211"
+  motherName: "Sunita Sharma"
+  motherEmail: "sunita.sharma@example.com"
+  motherPhoneNumber: "9876543212"

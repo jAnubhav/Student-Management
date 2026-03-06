@@ -1,0 +1,47 @@
+components:
+  schemas:
+    StudentAssigned:
+      description: Represents the assigned details of a student, including their unique enrollment number and the date of enrollment.
+      type: object
+      properties:
+        enrollmentNumber:
+          type: string
+          description: Unique enrollment number assigned to the student.
+          example: "CS220001"
+
+        dateOfEnrollment:
+          type: string
+          format: date
+          description: The date when the student was enrolled in the system, in ISO-8601 format (YYYY-MM-DD).
+          example: "2024-09-01"
+
+      example:
+        enrollmentNumber: "CS220001"
+        dateOfEnrollment: "2024-09-01"
+
+    Status:
+      description: Represents the current enrollment status of a student in the system.
+      type: object
+      properties:
+        status:
+          type: string
+          description: Indicates the current enrollment status of the student.
+          enum:
+            - "ACTIVE"
+            - "GRADUATED"
+            - "DROPPED_OUT"
+          example: "ACTIVE"
+
+      example:
+        status: "ACTIVE"
+
+    StudentResponseMetadata:
+      description: Student response combining assigned fields and current enrollment status.
+      allOf:
+        - $ref: '#/components/schemas/StudentAssigned'
+        - $ref: '#/components/schemas/Status'
+
+      example:
+        enrollmentNumber: "CS220001"
+        dateOfEnrollment: "2024-09-01"
+        status: "ACTIVE"

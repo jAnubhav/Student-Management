@@ -1,0 +1,29 @@
+title: Address
+description: Represents a physical address including street, city, state, and postal code details.
+type: object
+properties:
+  address:
+    type: string
+    description: Street address including house number, building name, or street details.
+    example: "Flat No. 12B, Sri Lakshmi Apartments, MG Road"
+
+  city:
+    type: string
+    description: Name of the city where the address is located.
+    example: "Chennai"
+
+  state:
+    type: string
+    description: Name of the state or union territory.
+    example: "Tamil Nadu"
+
+  zipcode:
+    type: string
+    description: Six-digit Indian postal PIN code corresponding to the address location.
+    example: "600034"
+
+example:
+  address: "Flat No. 12B, Sri Lakshmi Apartments, MG Road"
+  city: "Chennai"
+  state: "Tamil Nadu"
+  zipcode: "600034"

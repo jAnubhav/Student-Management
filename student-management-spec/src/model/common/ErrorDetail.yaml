@@ -1,0 +1,50 @@
+title: ErrorDetail
+description: Represents a single error entry describing a specific issue encountered while processing the API request.
+type: object
+required:
+  - type
+  - message
+properties:
+  type:
+    type: string
+    description: Machine-readable identifier indicating the category of error.
+    enum:
+      - "BAD_REQUEST"
+      - "INVALID_PARAMETER"
+      - "NOT_FOUND"
+      - "CONFLICT"
+      - "INTERNAL_SERVER_ERROR"
+      - "SERVICE_UNAVAILABLE"
+    example: "INVALID_PARAMETER"
+
+  errorParameter:
+    type: string
+    description: Name of the request parameter or field that caused the error, if applicable.
+    example: "phoneNumber"
+
+  message:
+    type: string
+    description: Human-readable explanation describing the error in detail.
+    example: "Phone number must contain exactly 10 digits."
+
+example:
+  invalidParameter:
+    summary: Error due to invalid parameter
+    value:
+      type: "INVALID_PARAMETER"
+      errorParameter: "phoneNumber"
+      message: "Phone number must contain exactly 10 digits."
+
+  notFound:
+    summary: Error due to resource not found
+    value:
+      type: "NOT_FOUND"
+      errorParameter: "enrollmentNumber"
+      message: "No student found with the provided Enrollment Number."
+
+  conflict:
+    summary: Error due to conflict
+    value:
+      type: "CONFLICT"
+      errorParameter: "enrollmentNumber"
+      message: "A student with this enrollment number already exists."

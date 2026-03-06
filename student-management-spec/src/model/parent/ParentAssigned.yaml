@@ -1,0 +1,15 @@
+components:
+  schemas:
+    ParentAssigned:
+      description: Represents the assigned details of a parent or guardian, including their unique enrollment number.
+      type: object
+      required:
+        - parentId
+      properties:
+        parentId:
+          type: string
+          description: Unique identifier assigned to the parent.
+          example: "220001"
+
+      example:
+        parentId: "220001"

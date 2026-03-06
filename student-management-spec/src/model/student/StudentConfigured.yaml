@@ -1,0 +1,70 @@
+title: StudentConfigured
+description: Represents the base properties of a student that are configured in the system, including personal details and contact information.
+allOf:
+  - $ref: '../common/Address.yaml'
+  - type: object
+    properties:
+      firstName:
+        type: string
+        description: First name of the student.
+        example: "Arjun"
+
+      lastName:
+        type: string
+        description: Last name of the student.
+        example: "Sharma"
+
+      email:
+        type: string
+        format: email
+        description: Email address of the student. Must be a valid email format.
+        example: "arjun.sharma@example.com"
+
+      phoneNumber:
+        type: string
+        description: Contact phone number of the student. Must contain exactly 10 numeric digits.
+        minLength: 10
+        maxLength: 10
+        pattern: '^[0-9]{10}$'
+        example: "9876543210"
+
+      department:
+        type: string
+        description: Academic department to which the student belongs.
+        enum:
+          - "COMPUTER_SCIENCE"
+          - "ELECTRONICS_AND_COMMUNICATION"
+          - "ELECTRICAL"
+          - "MECHANICAL"
+        example: "COMPUTER_SCIENCE"
+
+      gender:
+        type: string
+        description: Gender of the student.
+        enum:
+          - "M"
+          - "F"
+          - "O"
+        minLength: 1
+        maxLength: 1
+        pattern: '^[MFO]$'
+        example: "M"
+
+      dateOfBirth:
+        type: string
+        format: date
+        description: Date of birth of the student in ISO-8601 format (YYYY-MM-DD).
+        example: "2005-08-15"
+
+example:
+  address: "Flat No. 12B, Sri Lakshmi Apartments, MG Road"
+  city: "Chennai"
+  state: "Tamil Nadu"
+  zipcode: "600034"
+  firstName: "Arjun"
+  lastName: "Sharma"
+  email: "arjun.sharma@example.com"
+  phoneNumber: "9876543210"
+  department: "COMPUTER_SCIENCE"
+  gender: "M"
+  dateOfBirth: "2005-08-15"

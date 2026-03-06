@@ -1,0 +1,50 @@
+title: StudentDetailsResponse
+description: Represents the response returned when retrieving detailed information about a student, including their personal details, associated parent information, and enrollment details.
+allOf:
+  - $ref: '../common/Utility.yaml#/components/schemas/Status'
+  - type: object
+    properties:
+      studentDetails:
+        description: Contains the details of the student record, including the assigned enrollment number, personal details, contact information, and associated parent information.
+        allOf:
+          - $ref: './StudentAssigned.yaml#/components/schemas/StudentResponseMetadata'
+          - $ref: './StudentConfigured.yaml'
+          - type: object
+            properties:
+              parentDetails:
+                description: Contains the details of the parent or guardian associated with the student, including their personal details and contact information.
+                allOf:
+                  - $ref: '../parent/ParentDetailsResponse.yaml'
+
+example:
+  success:
+    summary: Student details retrieved successfully
+    value:
+      requestStatus: "SUCCESS"
+      studentDetails:
+        enrollmentNumber: "CS220001"
+        dateOfEnrollment: "2024-09-01"
+        status: "ACTIVE"
+        address: "Flat No. 12B, Sri Lakshmi Apartments, MG Road"
+        city: "Chennai"
+        state: "Tamil Nadu"
+        zipcode: "600034"
+        firstName: "Arjun"
+        lastName: "Sharma"
+        email: "arjun.sharma@example.com"
+        phoneNumber: "9876543210"
+        department: "COMPUTER_SCIENCE"
+        gender: "M"
+        dateOfBirth: "2005-08-15"
+        parentDetails:
+          parentId: "220001"
+          fatherName: "Ramesh Sharma"
+          fatherEmail: "ramesh.sharma@example.com"
+          fatherPhoneNumber: "9876543211"
+          motherName: "Sunita Sharma"
+          motherEmail: "sunita.sharma@example.com"
+          motherPhoneNumber: "9876543212"
+          address: "Flat No. 12B, Sri Lakshmi Apartments, MG Road"
+          city: "Chennai"
+          state: "Tamil Nadu"
+          zipcode: "600034"
