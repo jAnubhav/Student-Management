@@ -1,0 +1,10 @@
+title: UpdateParentRequest
+description: Represents the request body for updating an existing parent's details in the student management system. All fields are optional to allow for partial updates.
+allOf:
+  - $ref: './ParentConfigured.yaml'
+
+example:
+  address: "D-46, Sector 39"
+  city: "Noida"
+  state: "Uttar Pradesh"
+  zipcode: "201301"

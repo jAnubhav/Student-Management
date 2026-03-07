@@ -20,6 +20,9 @@ properties:
   zipcode:
     type: string
     description: Six-digit Indian postal PIN code corresponding to the address location.
+    pattern: '^[0-9]{6}$'
+    minLength: 6
+    maxLength: 6
     example: "600034"
 
 example:

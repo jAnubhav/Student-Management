@@ -51,7 +51,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../model/student/CreateStudentResponse.yaml'
+                $ref: '../model/student/SuccessStudentResponse.yaml'
               examples:
                 success:
                   summary: Successful creation
@@ -198,6 +198,114 @@ paths:
                       - type: "INVALID_PARAMETER"
                         errorParameter: "enrollmentNumber"
                         message: "Enrollment number must be in valid format."
+
+        '404':
+          description: The specified student record was not found in the system.
+          content:
+            application/json:
+              schema:
+                $ref: '../model/common/Utility.yaml#/components/schemas/FailureResponse'
+              examples:
+                notFound:
+                  summary: Student record not found
+                  value:
+                    requestStatus: "FAILURE"
+                    errors:
+                      - type: "NOT_FOUND"
+                        message: "No student record found with the provided enrollment number."
+
+        '500':
+          description: An unexpected internal server error occurred while processing the request and is not related to client input.
+          content:
+            application/json:
+              schema:
+                $ref: '../model/common/Utility.yaml#/components/schemas/FailureResponse'
+              examples:
+                serverError:
+                  summary: Internal server error
+                  value:
+                    requestStatus: "FAILURE"
+                    errors:
+                      - type: "INTERNAL_SERVER_ERROR"
+                        message: "An unexpected error occurred. Please try again later."
+
+        '503':
+          description: The service is temporarily unavailable due to maintenance or system overload and will become available again later.
+          content:
+            application/json:
+              schema:
+                $ref: '../model/common/Utility.yaml#/components/schemas/FailureResponse'
+              examples:
+                serviceUnavailable:
+                  summary: Service unavailable
+                  value:
+                    requestStatus: "FAILURE"
+                    errors:
+                      - type: "SERVICE_UNAVAILABLE"
+                        message: "The service is temporarily unavailable due to maintenance or high load."
+
+    patch:
+      summary: Update existing student details
+      operationId: updateStudent
+      description: Updates the details of an existing student record based on the provided enrollment number and request body after validating the input and ensuring the record exists.
+      tags:
+        - Student
+
+      parameters:
+        - name: enrollmentNumber
+          in: path
+          required: true
+          description: Unique identifier of the student to be updated.
+          schema:
+            type: string
+            example: "CS220001"
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../model/student/UpdateStudentRequest.yaml'
+            examples:
+              sampleUpdate:
+                summary: Valid student update request
+                value:
+                  address: "D-46, Sector 39"
+                  city: "Noida"
+                  state: "Uttar Pradesh"
+                  zipcode: "201301"
+
+      responses:
+        '200':
+          description: Student record was successfully updated and the latest details are returned in the response body.
+          content:
+            application/json:
+              schema:
+                $ref: '../model/student/SuccessStudentResponse.yaml'
+              examples:
+                success:
+                  summary: Student details updated successfully
+                  value:
+                    requestStatus: "SUCCESS"
+                    studentDetails:
+                      enrollmentNumber: "CS220001"
+                      dateOfEnrollment: "2024-09-01"
+
+        '400':
+          description: The request could not be processed due to validation failures, malformed input data, or missing required attributes.
+          content:
+            application/json:
+              schema:
+                $ref: '../model/common/Utility.yaml#/components/schemas/FailureResponse'
+              examples:
+                validationError:
+                  summary: Validation errors
+                  value:
+                    requestStatus: "FAILURE"
+                    errors:
+                      - type: "INVALID_PARAMETER"
+                        errorParameter: "zipcode"
+                        message: "Zipcode must be a 6-digit number."
 
         '404':
           description: The specified student record was not found in the system.
