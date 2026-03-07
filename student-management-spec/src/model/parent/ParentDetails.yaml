@@ -1,6 +1,7 @@
 title: ParentDetails
 description: Represents the complete details of a parent or guardian, combining the assigned parent ID with personal and contact information.
 allOf:
+  - $ref: '../common/Utility.yaml#/components/schemas/LastModified'
   - $ref: './ParentAssigned.yaml#/components/schemas/ParentAssigned'
   - $ref: './CreateParentRequest.yaml'
 
@@ -16,3 +17,4 @@ example:
   city: "Chennai"
   state: "Tamil Nadu"
   zipcode: "600034"
+  lastModifiedAt: "2024-09-01T10:30:00Z"

@@ -1,13 +1,15 @@
 title: StudentDetails
 description: Represents the complete details of a student, combining enrollment metadata, personal information, and associated parent details.
 allOf:
+  - $ref: '../common/Utility.yaml#/components/schemas/LastModified'
   - $ref: './StudentAssigned.yaml#/components/schemas/StudentResponseMetadata'
   - $ref: './StudentConfigured.yaml'
   - type: object
     properties:
       parentDetails:
         description: Contains the details of the parent or guardian associated with the student, including their personal details and contact information.
-        $ref: '../parent/ParentDetails.yaml'
+        allOf:
+          - $ref: '../parent/ParentDetails.yaml'
 
 example:
   enrollmentNumber: "CS220001"
@@ -24,6 +26,7 @@ example:
   department: "COMPUTER_SCIENCE"
   gender: "M"
   dateOfBirth: "2005-08-15"
+  lastModifiedAt: "2024-09-01T10:30:00Z"
   parentDetails:
     parentId: "220001"
     fatherName: "Ramesh Sharma"
@@ -36,3 +39,4 @@ example:
     city: "Chennai"
     state: "Tamil Nadu"
     zipcode: "600034"
+    lastModifiedAt: "2024-09-01T10:30:00Z"
