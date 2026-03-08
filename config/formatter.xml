@@ -64,7 +64,8 @@
         <setting id="org.eclipse.jdt.core.formatter.insert_space_after_comma_in_type_parameters" value="insert"/>
 
         <!-- ===== Imports ===== -->
-        <setting id="org.eclipse.jdt.core.formatter.import_order" value="java;javax;org;com"/>
+        <setting id="org.eclipse.jdt.core.formatter.import_order" value="java;javax;org;com;lombok"/>
+        <setting id="org.eclipse.jdt.core.formatter.blank_lines_between_import_groups" value="1"/>
         <setting id="org.eclipse.jdt.core.formatter.imports_on_demand_threshold" value="999"/>
         <setting id="org.eclipse.jdt.core.formatter.static_imports_on_demand_threshold" value="999"/>
 

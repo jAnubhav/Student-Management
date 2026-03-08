@@ -2,7 +2,6 @@ package org.anubhav.student_management.exception.handler;
 
 import org.anubhav.model.ErrorDetail;
 import org.anubhav.model.FailureResponse;
-
 import org.anubhav.student_management.exception.validation.IllegalPathParameterException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
