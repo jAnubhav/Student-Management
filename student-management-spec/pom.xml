@@ -10,7 +10,6 @@
     </parent>
 
     <artifactId>student-management-spec</artifactId>
-
     <packaging>jar</packaging>
 
     <dependencies>

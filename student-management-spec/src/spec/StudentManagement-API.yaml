@@ -127,21 +127,21 @@ paths:
                         message: "The service is temporarily unavailable due to maintenance or high load."
 
   /student/{enrollmentNumber}:
+    parameters:
+      - name: enrollmentNumber
+        in: path
+        required: true
+        description: Unique identifier of the student to be retrieved.
+        schema:
+          type: string
+          example: "CS220001"
+
     get:
       summary: Retrieve student details by enrollment number
       operationId: getStudentById
       description: Fetches the details of a student record based on the provided unique identifier after validating the input and ensuring the record exists.
       tags:
         - Student
-
-      parameters:
-        - name: enrollmentNumber
-          in: path
-          required: true
-          description: Unique identifier of the student to be retrieved.
-          schema:
-            type: string
-            example: "CS220001"
 
       responses:
         '200':
@@ -250,15 +250,6 @@ paths:
       description: Updates the details of an existing student record based on the provided enrollment number and request body after validating the input and ensuring the record exists.
       tags:
         - Student
-
-      parameters:
-        - name: enrollmentNumber
-          in: path
-          required: true
-          description: Unique identifier of the student to be updated.
-          schema:
-            type: string
-            example: "CS220001"
 
       requestBody:
         required: true

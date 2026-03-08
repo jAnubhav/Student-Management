@@ -124,21 +124,21 @@ paths:
                         message: "The service is temporarily unavailable due to maintenance or high load."
 
   /parent/{parentId}:
+    parameters:
+      - name: parentId
+        in: path
+        required: true
+        description: Unique identifier of the parent to be updated.
+        schema:
+          type: string
+          example: "220001"
+
     get:
       summary: Retrieve parent details by parent ID
       operationId: getParentById
       description: Fetches the details of a parent record based on the provided unique identifier after validating the input and ensuring the record exists.
       tags:
         - Parent
-
-      parameters:
-        - name: parentId
-          in: path
-          required: true
-          description: Unique identifier of the parent to be retrieved.
-          schema:
-            type: string
-            example: "220001"
 
       responses:
         '200':
@@ -232,15 +232,6 @@ paths:
       description: Updates the details of a parent record based on the provided unique identifier after validating the input and ensuring the record exists.
       tags:
           - Parent
-
-      parameters:
-        - name: parentId
-          in: path
-          required: true
-          description: Unique identifier of the parent to be updated.
-          schema:
-            type: string
-            example: "220001"
 
       requestBody:
         required: true
