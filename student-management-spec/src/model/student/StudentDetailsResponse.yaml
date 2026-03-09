@@ -15,7 +15,7 @@ example:
     value:
       requestStatus: "SUCCESS"
       studentDetails:
-        enrollmentNumber: "CS220001"
+        enrollmentNumber: "220001"
         dateOfEnrollment: "2024-09-01"
         status: "ACTIVE"
         address: "Flat No. 12B, Sri Lakshmi Apartments, MG Road"

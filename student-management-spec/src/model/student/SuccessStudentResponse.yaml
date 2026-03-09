@@ -15,5 +15,5 @@ example:
     value:
       requestStatus: "SUCCESS"
       studentDetails:
-        enrollmentNumber: "CS220001"
+        enrollmentNumber: "220001"
         dateOfEnrollment: "2024-09-01"

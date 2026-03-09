@@ -58,7 +58,7 @@ paths:
                   value:
                     requestStatus: "SUCCESS"
                     studentDetails:
-                      enrollmentNumber: "CS220001"
+                      enrollmentNumber: "220001"
                       dateOfEnrollment: "2024-09-01"
 
         '400':
@@ -134,7 +134,8 @@ paths:
         description: Unique identifier of the student to be retrieved.
         schema:
           type: string
-          example: "CS220001"
+          pattern: "^[0-9]{6}$"
+          example: "220001"
 
     get:
       summary: Retrieve student details by enrollment number
@@ -156,7 +157,7 @@ paths:
                   value:
                     requestStatus: "SUCCESS"
                     studentDetails:
-                      enrollmentNumber: "CS220001"
+                      enrollmentNumber: "220001"
                       dateOfEnrollment: "2024-09-01"
                       status: "ACTIVE"
                       address: "Flat No. 12B, Sri Lakshmi Apartments, MG Road"
@@ -279,7 +280,7 @@ paths:
                   value:
                     requestStatus: "SUCCESS"
                     studentDetails:
-                      enrollmentNumber: "CS220001"
+                      enrollmentNumber: "220001"
                       dateOfEnrollment: "2024-09-01"
 
         '400':
