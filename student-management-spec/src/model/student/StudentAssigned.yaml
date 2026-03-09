@@ -6,6 +6,8 @@ components:
       properties:
         enrollmentNumber:
           type: string
+          minLength: 8
+          maxLength: 8
           description: Unique enrollment number assigned to the student.
           example: "CS220001"
 

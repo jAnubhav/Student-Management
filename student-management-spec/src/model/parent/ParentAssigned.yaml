@@ -8,6 +8,9 @@ components:
       properties:
         parentId:
           type: string
+          minLength: 6
+          maxLength: 6
+          pattern: '^[0-9]{6}$'
           description: Unique identifier assigned to the parent.
           example: "220001"
 

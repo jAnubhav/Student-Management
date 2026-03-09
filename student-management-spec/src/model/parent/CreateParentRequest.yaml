@@ -7,9 +7,6 @@ allOf:
       - fatherName
       - fatherEmail
       - fatherPhoneNumber
-      - motherName
-      - motherEmail
-      - motherPhoneNumber
       - address
       - city
       - state
