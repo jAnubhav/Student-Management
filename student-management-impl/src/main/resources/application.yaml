@@ -4,3 +4,14 @@ server:
 spring:
   jackson:
     default-property-inclusion: non_null
+
+  datasource:
+    url: jdbc:mysql://localhost:3333/student_management
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:password}
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update

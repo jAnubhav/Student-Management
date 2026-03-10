@@ -3,6 +3,8 @@ description: Represents the response returned when retrieving detailed informati
 allOf:
   - $ref: '../common/Utility.yaml#/components/schemas/RequestStatus'
   - type: object
+    required:
+      - studentDetails
     properties:
       studentDetails:
         description: Contains the details of the student record, including the assigned enrollment number, personal details, contact information, and associated parent information.

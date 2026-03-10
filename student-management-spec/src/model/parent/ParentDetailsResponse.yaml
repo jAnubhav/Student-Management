@@ -3,6 +3,8 @@ description: Represents the response returned when retrieving detailed informati
 allOf:
   - $ref: '../common/Utility.yaml#/components/schemas/RequestStatus'
   - type: object
+    required:
+      - parentDetails
     properties:
       parentDetails:
         description: Contains the details of the parent record, including the assigned parent ID, personal details, and contact information.

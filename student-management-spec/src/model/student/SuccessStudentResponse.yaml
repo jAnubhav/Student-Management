@@ -3,6 +3,8 @@ description: Represents the response returned after attempting to create a stude
 allOf:
   - $ref: '../common/Utility.yaml#/components/schemas/RequestStatus'
   - type: object
+    required:
+      - studentDetails
     properties:
       studentDetails:
         allOf:
