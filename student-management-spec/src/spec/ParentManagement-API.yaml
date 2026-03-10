@@ -14,7 +14,7 @@ tags:
     description: Operations related to managing parent information associated with students.
 
 paths:
-  /parent:
+  /parents:
     post:
       summary: Create a new parent record
       operationId: createParent
@@ -123,7 +123,7 @@ paths:
                       - type: "SERVICE_UNAVAILABLE"
                         message: "The service is temporarily unavailable due to maintenance or high load."
 
-  /parent/{parentId}:
+  /parents/{parentId}:
     parameters:
       - name: parentId
         in: path
@@ -131,6 +131,9 @@ paths:
         description: Unique identifier of the parent to be updated.
         schema:
           type: string
+          pattern: "^[0-9]{6}$"
+          x-pattern-message: "{parentId.pattern}"
+          x-field-extra-annotation: '@Size(min = 6, max = 6, message = "{parentId.size}")'
           example: "220001"
 
     get:
@@ -276,8 +279,8 @@ paths:
                     requestStatus: "FAILURE"
                     errors:
                       - type: "INVALID_PARAMETER"
-                        errorParameter: "zipcode"
-                        message: "Zipcode must be a 6-digit number."
+                        errorParameter: "parentId"
+                        message: "parentId must be a 6-digit number."
 
         '404':
           description: The specified parent record was not found in the system.

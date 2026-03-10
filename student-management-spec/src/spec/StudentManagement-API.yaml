@@ -14,7 +14,7 @@ tags:
     description: Operations related to student lifecycle management including creation and retrieval.
 
 paths:
-  /student:
+  /students:
     post:
       summary: Create a new student
       operationId: createStudent
@@ -126,7 +126,7 @@ paths:
                       - type: "SERVICE_UNAVAILABLE"
                         message: "The service is temporarily unavailable due to maintenance or high load."
 
-  /student/{enrollmentNumber}:
+  /students/{enrollmentNumber}:
     parameters:
       - name: enrollmentNumber
         in: path
@@ -135,6 +135,8 @@ paths:
         schema:
           type: string
           pattern: "^[0-9]{6}$"
+          x-pattern-message: "{enrollmentNumber.pattern}"
+          x-field-extra-annotation: '@Size(min = 6, max = 6, message = "{enrollmentNumber.size}")'
           example: "220001"
 
     get:
