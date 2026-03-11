@@ -15,9 +15,18 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
 @RestControllerAdvice
+/**
+ * Handles validation, not-found, and dependency availability exceptions.
+ */
 public class ValidationExceptionHandler {
 
     @ExceptionHandler(ConstraintViolationException.class)
+    /**
+     * Converts method-level constraint violations into a standardized 400 response.
+     *
+     * @param ex source validation exception
+     * @return failure response containing field-specific validation errors
+     */
     public ResponseEntity<FailureResponse> handleConstraintViolationException(ConstraintViolationException ex) {
         List<ErrorDetail> errors = ex.getConstraintViolations().stream().map(violation -> {
             String parameterName = extractParameterName(violation);
@@ -29,6 +38,12 @@ public class ValidationExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
+    /**
+     * Converts request-body bean validation failures into a standardized 400 response.
+     *
+     * @param ex source method argument validation exception
+     * @return failure response containing field validation errors
+     */
     public ResponseEntity<FailureResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         List<ErrorDetail> errors = ex.getBindingResult().getFieldErrors().stream().map(this::toErrorDetail).toList();
 
@@ -36,6 +51,12 @@ public class ValidationExceptionHandler {
     }
 
     @ExceptionHandler(NotFoundException.class)
+    /**
+     * Converts domain-level missing records into a standardized 404 response.
+     *
+     * @param ex source not-found exception
+     * @return failure response with not-found details
+     */
     public ResponseEntity<FailureResponse> handleNotFoundException(NotFoundException ex) {
         ErrorDetail errorDetail = new ErrorDetail(ErrorDetail.TypeEnum.NOT_FOUND, ex.getMessage())
                 .errorParameter(ex.getParameterName());
@@ -45,17 +66,35 @@ public class ValidationExceptionHandler {
     }
 
     @ExceptionHandler(DependencyUnavailableException.class)
+    /**
+     * Converts null/unavailable internal dependencies into a standardized 503 response.
+     *
+     * @param ex source dependency-unavailable exception
+     * @return failure response without field-level parameter binding
+     */
     public ResponseEntity<FailureResponse> handleDependencyUnavailableException(DependencyUnavailableException ex) {
         ErrorDetail errorDetail = new ErrorDetail(ErrorDetail.TypeEnum.SERVICE_UNAVAILABLE, ex.getMessage());
         return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
                 .body(new FailureResponse(FailureResponse.RequestStatusEnum.FAILURE, List.of(errorDetail)));
     }
 
+    /**
+     * Extracts the validated parameter name from a constraint violation path.
+     *
+     * @param violation source violation
+     * @return resolved parameter/field name
+     */
     private String extractParameterName(ConstraintViolation<?> violation) {
         String path = violation.getPropertyPath().toString();
         return path.substring(path.lastIndexOf('.') + 1);
     }
 
+    /**
+     * Maps Spring field validation errors to API error-detail format.
+     *
+     * @param fieldError source field error
+     * @return API error detail instance
+     */
     private ErrorDetail toErrorDetail(FieldError fieldError) {
         return new ErrorDetail(ErrorDetail.TypeEnum.INVALID_PARAMETER, fieldError.getDefaultMessage())
                 .errorParameter(fieldError.getField());

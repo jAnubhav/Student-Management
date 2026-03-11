@@ -17,6 +17,9 @@ import java.util.Date;
 @Table(name = "student")
 @Data
 @EqualsAndHashCode(callSuper = true)
+/**
+ * JPA entity representing a student record.
+ */
 public class StudentEntity extends BaseEntity {
 
     @Id
@@ -56,6 +59,9 @@ public class StudentEntity extends BaseEntity {
     private Integer parentId;
 
     @PrePersist
+    /**
+     * Sets the initial lifecycle status for newly created records.
+     */
     public void setDefaultStatus() {
         status = "ACTIVE";
     }

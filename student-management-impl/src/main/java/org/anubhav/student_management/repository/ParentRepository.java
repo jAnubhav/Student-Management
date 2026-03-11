@@ -5,5 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
+/**
+ * Data-access repository for parent records.
+ */
 public interface ParentRepository extends JpaRepository<ParentEntity, String> {
 }

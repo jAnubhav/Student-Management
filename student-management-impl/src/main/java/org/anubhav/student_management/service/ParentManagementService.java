@@ -13,6 +13,9 @@ import org.anubhav.student_management.utility.Constants;
 import org.springframework.stereotype.Service;
 
 @Service
+/**
+ * Business service for parent create/read/update operations.
+ */
 public class ParentManagementService {
 
     private final ParentRepository repository;
@@ -23,6 +26,12 @@ public class ParentManagementService {
         this.mapper = mapper;
     }
 
+    /**
+     * Creates a parent record from request data.
+     *
+     * @param createParentRequest request payload
+     * @return assigned parent metadata
+     */
     public ParentAssigned createParent(CreateParentRequest createParentRequest) {
         ensureDependenciesAvailable();
 
@@ -30,6 +39,12 @@ public class ParentManagementService {
         return mapper.toAssignedDto(repository.save(parentEntity));
     }
 
+    /**
+     * Fetches a parent record by ID.
+     *
+     * @param parentId parent identifier
+     * @return complete parent details
+     */
     public ParentDetails getParentById(String parentId) {
         ensureDependenciesAvailable();
 
@@ -42,6 +57,13 @@ public class ParentManagementService {
         return mapper.toDto(parentEntity);
     }
 
+    /**
+     * Updates an existing parent record with partial data.
+     *
+     * @param parentId parent identifier
+     * @param updateParentRequest patch payload
+     * @return assigned parent metadata for the updated record
+     */
     public ParentAssigned updateParentById(String parentId, UpdateParentRequest updateParentRequest) {
         ensureDependenciesAvailable();
 
@@ -56,6 +78,9 @@ public class ParentManagementService {
         return mapper.toAssignedDto(repository.save(existingParentEntity));
     }
 
+    /**
+     * Ensures required collaborators are available before processing.
+     */
     private void ensureDependenciesAvailable() {
         if (repository == null) {
             throw new DependencyUnavailableException("Parent repository is unavailable.");

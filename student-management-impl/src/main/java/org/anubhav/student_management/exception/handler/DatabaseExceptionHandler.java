@@ -17,9 +17,18 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
+/**
+ * Handles persistence-layer and database availability failures.
+ */
 public class DatabaseExceptionHandler {
 
     @ExceptionHandler({DuplicateKeyException.class, DataIntegrityViolationException.class})
+    /**
+     * Converts data-integrity conflicts into a standardized 409 response.
+     *
+     * @param ex source data-access exception
+     * @return failure response with conflict error type
+     */
     public ResponseEntity<FailureResponse> handleConflictExceptions(DataAccessException ex) {
         ErrorDetail error = new ErrorDetail(
                 ErrorDetail.TypeEnum.CONFLICT,
@@ -31,6 +40,12 @@ public class DatabaseExceptionHandler {
 
     @ExceptionHandler({CannotGetJdbcConnectionException.class, DataAccessResourceFailureException.class,
             CannotAcquireLockException.class, QueryTimeoutException.class, TransactionSystemException.class})
+    /**
+     * Converts transient database outages/timeouts into a standardized 503 response.
+     *
+     * @param ex source exception indicating DB unavailability
+     * @return failure response with service-unavailable error type
+     */
     public ResponseEntity<FailureResponse> handleDatabaseAvailabilityExceptions(Exception ex) {
         ErrorDetail error = new ErrorDetail(
                 ErrorDetail.TypeEnum.SERVICE_UNAVAILABLE,

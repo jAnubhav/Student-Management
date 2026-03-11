@@ -8,6 +8,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @MappedSuperclass
 @Data
+/**
+ * Base persistence fields shared by domain entities.
+ */
 public class BaseEntity {
 
     @Column(length = 100)

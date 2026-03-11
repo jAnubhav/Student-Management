@@ -13,6 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+/**
+ * REST controller for student endpoints.
+ */
 public class StudentManagementController implements StudentManagementInterface {
 
     private final StudentManagementService service;
@@ -21,6 +24,12 @@ public class StudentManagementController implements StudentManagementInterface {
         this.service = service;
     }
 
+    /**
+     * Creates a student and returns assigned enrollment metadata.
+     *
+     * @param createStudentRequest validated create-student payload
+     * @return successful response containing assigned student details
+     */
     @Override
     public ResponseEntity<SuccessStudentResponse> createStudent(CreateStudentRequest createStudentRequest) {
         ensureDependenciesAvailable();
@@ -33,6 +42,12 @@ public class StudentManagementController implements StudentManagementInterface {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Retrieves student details by enrollment number.
+     *
+     * @param enrollmentNumber unique student enrollment identifier
+     * @return successful response containing full student details
+     */
     @Override
     public ResponseEntity<StudentDetailsResponse> getStudentById(String enrollmentNumber) {
         ensureDependenciesAvailable();
@@ -45,6 +60,13 @@ public class StudentManagementController implements StudentManagementInterface {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Updates student details by enrollment number.
+     *
+     * @param enrollmentNumber unique student enrollment identifier
+     * @param updateStudentRequest partial update payload
+     * @return successful response containing assigned student metadata
+     */
     @Override
     public ResponseEntity<SuccessStudentResponse> updateStudent(String enrollmentNumber,
             UpdateStudentRequest updateStudentRequest) {
@@ -58,6 +80,9 @@ public class StudentManagementController implements StudentManagementInterface {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Ensures required collaborators are available before processing.
+     */
     private void ensureDependenciesAvailable() {
         if (service == null) {
             throw new DependencyUnavailableException("Student service is unavailable.");

@@ -5,6 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 
 @Configuration
+/**
+ * Registers method-level validation support for @Validated beans.
+ */
 public class MethodValidationConfig {
 
     /**
@@ -19,6 +22,11 @@ public class MethodValidationConfig {
      * ConstraintViolationException before the method body is reached.
      */
     @Bean
+    /**
+     * Creates a MethodValidationPostProcessor to enforce Bean Validation on method parameters.
+     *
+     * @return configured method validation post-processor
+     */
     public static MethodValidationPostProcessor methodValidationPostProcessor() {
         return new MethodValidationPostProcessor();
     }

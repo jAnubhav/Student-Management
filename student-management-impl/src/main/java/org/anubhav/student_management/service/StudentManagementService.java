@@ -14,6 +14,9 @@ import org.anubhav.student_management.utility.Constants;
 import org.springframework.stereotype.Service;
 
 @Service
+/**
+ * Business service for student create/read/update operations.
+ */
 public class StudentManagementService {
 
     private final ParentManagementService parentManagementService;
@@ -27,6 +30,12 @@ public class StudentManagementService {
         this.mapper = mapper;
     }
 
+    /**
+     * Creates a student record from request data.
+     *
+     * @param createStudentRequest request payload
+     * @return assigned student metadata
+     */
     public StudentAssigned createStudent(CreateStudentRequest createStudentRequest) {
         ensureDependenciesAvailable();
 
@@ -34,6 +43,12 @@ public class StudentManagementService {
         return mapper.toAssignedDto(repository.save(studentEntity));
     }
 
+    /**
+     * Fetches a student record by enrollment number and enriches parent details.
+     *
+     * @param enrollmentNumber student enrollment identifier
+     * @return complete student details
+     */
     public StudentDetails getStudentById(String enrollmentNumber) {
         ensureDependenciesAvailable();
 
@@ -50,6 +65,13 @@ public class StudentManagementService {
         return mapper.toDto(studentEntity).parentDetails(parentDetails);
     }
 
+    /**
+     * Updates an existing student record with partial data.
+     *
+     * @param enrollmentNumber student enrollment identifier
+     * @param updateStudentRequest patch payload
+     * @return assigned student metadata for the updated record
+     */
     public StudentAssigned updateStudentById(String enrollmentNumber, UpdateStudentRequest updateStudentRequest) {
         ensureDependenciesAvailable();
 
@@ -64,6 +86,9 @@ public class StudentManagementService {
         return mapper.toAssignedDto(repository.save(existingStudentEntity));
     }
 
+    /**
+     * Ensures required collaborators are available before processing.
+     */
     private void ensureDependenciesAvailable() {
         if (parentManagementService == null) {
             throw new DependencyUnavailableException("Parent service is unavailable.");

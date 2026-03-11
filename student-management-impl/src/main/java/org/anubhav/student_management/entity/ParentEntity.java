@@ -13,6 +13,9 @@ import lombok.EqualsAndHashCode;
 @Table(name = "parent")
 @Data
 @EqualsAndHashCode(callSuper = true)
+/**
+ * JPA entity representing a parent/guardian record.
+ */
 public class ParentEntity extends BaseEntity {
 
     @Id
