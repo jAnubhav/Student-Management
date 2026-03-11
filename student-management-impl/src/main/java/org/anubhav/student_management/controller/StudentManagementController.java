@@ -7,6 +7,7 @@ import org.anubhav.model.StudentDetails;
 import org.anubhav.model.StudentDetailsResponse;
 import org.anubhav.model.SuccessStudentResponse;
 import org.anubhav.model.UpdateStudentRequest;
+import org.anubhav.student_management.exception.DependencyUnavailableException;
 import org.anubhav.student_management.service.StudentManagementService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,8 @@ public class StudentManagementController implements StudentManagementInterface {
 
     @Override
     public ResponseEntity<SuccessStudentResponse> createStudent(CreateStudentRequest createStudentRequest) {
+        ensureDependenciesAvailable();
+
         StudentAssigned studentAssigned = service.createStudent(createStudentRequest);
         SuccessStudentResponse response = new SuccessStudentResponse(
                 SuccessStudentResponse.RequestStatusEnum.SUCCESS,
@@ -32,6 +35,8 @@ public class StudentManagementController implements StudentManagementInterface {
 
     @Override
     public ResponseEntity<StudentDetailsResponse> getStudentById(String enrollmentNumber) {
+        ensureDependenciesAvailable();
+
         StudentDetails studentDetails = service.getStudentById(enrollmentNumber);
         StudentDetailsResponse response = new StudentDetailsResponse(
                 StudentDetailsResponse.RequestStatusEnum.SUCCESS,
@@ -43,7 +48,15 @@ public class StudentManagementController implements StudentManagementInterface {
     @Override
     public ResponseEntity<SuccessStudentResponse> updateStudent(String enrollmentNumber,
             UpdateStudentRequest updateStudentRequest) {
+        ensureDependenciesAvailable();
+
         return null;
+    }
+
+    private void ensureDependenciesAvailable() {
+        if (service == null) {
+            throw new DependencyUnavailableException("Student service is unavailable.");
+        }
     }
 
 }

@@ -3,6 +3,7 @@ package org.anubhav.student_management.service;
 import org.anubhav.model.CreateParentRequest;
 import org.anubhav.model.ParentAssigned;
 import org.anubhav.model.ParentDetails;
+import org.anubhav.student_management.exception.DependencyUnavailableException;
 import org.anubhav.student_management.entity.ParentEntity;
 import org.anubhav.student_management.exception.NotFoundException;
 import org.anubhav.student_management.mapper.ParentMapper;
@@ -22,11 +23,15 @@ public class ParentManagementService {
     }
 
     public ParentAssigned createParent(CreateParentRequest createParentRequest) {
+        ensureDependenciesAvailable();
+
         ParentEntity parentEntity = mapper.toEntity(createParentRequest);
         return mapper.toAssignedDto(repository.save(parentEntity));
     }
 
     public ParentDetails getParentById(String parentId) {
+        ensureDependenciesAvailable();
+
         ParentEntity parentEntity = repository.findById(parentId).orElseThrow(
                 () -> new NotFoundException(
                         "Parent Details not found for Parent ID: " + parentId,
@@ -34,6 +39,15 @@ public class ParentManagementService {
                 )
         );
         return mapper.toDto(parentEntity);
+    }
+
+    private void ensureDependenciesAvailable() {
+        if (repository == null) {
+            throw new DependencyUnavailableException("Parent repository is unavailable.");
+        }
+        if (mapper == null) {
+            throw new DependencyUnavailableException("Parent mapper is unavailable.");
+        }
     }
 
 }
