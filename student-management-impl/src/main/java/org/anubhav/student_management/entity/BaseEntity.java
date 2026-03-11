@@ -10,10 +10,13 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Data
 public class BaseEntity {
 
+    @Column(length = 100)
     private String address;
 
+    @Column(length = 40)
     private String city;
 
+    @Column(length = 40)
     private String state;
 
     @Column(length = 6)
