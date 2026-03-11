@@ -8,10 +8,8 @@ components:
       properties:
         parentId:
           type: string
-          minLength: 6
-          maxLength: 6
           pattern: '^[0-9]{6}$'
-          x-minLength-message: "{parentId.size}"
+          x-field-extra-annotation: '@Size(min = 6, max = 6, message = "{parentId.size}")'
           x-pattern-message: "{parentId.pattern}"
           description: Unique identifier assigned to the parent.
           example: "220001"

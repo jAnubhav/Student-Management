@@ -6,10 +6,8 @@ components:
       properties:
         enrollmentNumber:
           type: string
-          minLength: 6
-          maxLength: 6
           pattern: "^[0-9]{6}$"
-          x-minLength-message: "{enrollmentNumber.size}"
+          x-field-extra-annotation: '@Size(min = 6, max = 6, message = "{enrollmentNumber.size}")'
           x-pattern-message: "{enrollmentNumber.pattern}"
           description: Unique enrollment number assigned to the student.
           example: "220001"

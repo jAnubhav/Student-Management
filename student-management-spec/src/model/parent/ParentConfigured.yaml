@@ -7,54 +7,42 @@ allOf:
       fatherName:
         type: string
         description: Full name of the father or male guardian of the student.
-        minLength: 3
-        maxLength: 40
-        x-minLength-message: "{fatherName.size}"
+        x-field-extra-annotation: '@Size(min = 3, max = 40, message = "{fatherName.size}")'
         example: "Ramesh Sharma"
 
       fatherEmail:
         type: string
         format: email
         description: Email address of the father or male guardian. Must be a valid email format.
-        minLength: 3
-        maxLength: 40
-        x-minLength-message: "{fatherEmail.size}"
+        x-field-extra-annotation: '@Size(min = 3, max = 40, message = "{fatherEmail.size}")'
         example: "ramesh.sharma@example.com"
 
       fatherPhoneNumber:
         type: string
         description: Contact phone number of the father or male guardian. Must contain exactly 10 numeric digits.
-        minLength: 10
-        maxLength: 10
         pattern: '^[0-9]{10}$'
-        x-minLength-message: "{fatherPhoneNumber.size}"
+        x-field-extra-annotation: '@Size(min = 10, max = 10, message = "{fatherPhoneNumber.size}")'
         x-pattern-message: "{fatherPhoneNumber.pattern}"
         example: "9876543211"
 
       motherName:
         type: string
         description: Full name of the mother or female guardian of the student.
-        minLength: 3
-        maxLength: 40
-        x-minLength-message: "{motherName.size}"
+        x-field-extra-annotation: '@Size(min = 3, max = 40, message = "{motherName.size}")'
         example: "Sunita Sharma"
 
       motherEmail:
         type: string
         format: email
         description: Email address of the mother or female guardian. Must be a valid email format.
-        minLength: 3
-        maxLength: 40
-        x-minLength-message: "{motherEmail.size}"
+        x-field-extra-annotation: '@Size(min = 3, max = 40, message = "{motherEmail.size}")'
         example: "sunita.sharma@example.com"
 
       motherPhoneNumber:
         type: string
         description: Contact phone number of the mother or female guardian. Must contain exactly 10 numeric digits.
-        minLength: 10
-        maxLength: 10
         pattern: '^[0-9]{10}$'
-        x-minLength-message: "{motherPhoneNumber.size}"
+        x-field-extra-annotation: '@Size(min = 10, max = 10, message = "{motherPhoneNumber.size}")'
         x-pattern-message: "{motherPhoneNumber.pattern}"
         example: "9876543212"
 

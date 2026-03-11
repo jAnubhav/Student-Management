@@ -5,34 +5,26 @@ properties:
   address:
     type: string
     description: Street address including house number, building name, or street details.
-    minLength: 3
-    maxLength: 100
-    x-minLength-message: "{address.size}"
+    x-field-extra-annotation: '@Size(min = 3, max = 100, message = "{address.size}")'
     example: "Flat No. 12B, Sri Lakshmi Apartments, MG Road"
 
   city:
     type: string
     description: Name of the city where the address is located.
-    minLength: 3
-    maxLength: 40
-    x-minLength-message: "{city.size}"
+    x-field-extra-annotation: '@Size(min = 3, max = 40, message = "{city.size}")'
     example: "Chennai"
 
   state:
     type: string
     description: Name of the state or union territory.
-    minLength: 3
-    maxLength: 40
-    x-minLength-message: "{state.size}"
+    x-field-extra-annotation: '@Size(min = 3, max = 40, message = "{state.size}")'
     example: "Tamil Nadu"
 
   zipcode:
     type: string
     description: Six-digit Indian postal PIN code corresponding to the address location.
     pattern: '^[0-9]{6}$'
-    minLength: 6
-    maxLength: 6
-    x-minLength-message: "{zipcode.size}"
+    x-field-extra-annotation: '@Size(min = 6, max = 6, message = "{zipcode.size}")'
     x-pattern-message: "{zipcode.pattern}"
     example: "600034"
 

@@ -7,35 +7,27 @@ allOf:
       firstName:
         type: string
         description: First name of the student.
-        minLength: 3
-        maxLength: 20
-        x-minLength-message: "{firstName.size}"
+        x-field-extra-annotation: '@Size(min = 3, max = 20, message = "{firstName.size}")'
         example: "Arjun"
 
       lastName:
         type: string
         description: Last name of the student.
-        minLength: 3
-        maxLength: 20
-        x-minLength-message: "{lastName.size}"
+        x-field-extra-annotation: '@Size(min = 3, max = 20, message = "{lastName.size}")'
         example: "Sharma"
 
       email:
         type: string
         format: email
         description: Email address of the student. Must be a valid email format.
-        minLength: 3
-        maxLength: 40
-        x-minLength-message: "{email.size}"
+        x-field-extra-annotation: '@Size(min = 3, max = 40, message = "{email.size}")'
         example: "arjun.sharma@example.com"
 
       phoneNumber:
         type: string
         description: Contact phone number of the student. Must contain exactly 10 numeric digits.
-        minLength: 10
-        maxLength: 10
         pattern: '^[0-9]{10}$'
-        x-minLength-message: "{phoneNumber.size}"
+        x-field-extra-annotation: '@Size(min = 10, max = 10, message = "{phoneNumber.size}")'
         x-pattern-message: "{phoneNumber.pattern}"
         example: "9876543210"
 
@@ -56,11 +48,6 @@ allOf:
           - "M"
           - "F"
           - "O"
-        minLength: 1
-        maxLength: 1
-        pattern: '^[MFO]$'
-        x-minLength-message: "{gender.size}"
-        x-pattern-message: "{gender.pattern}"
         example: "M"
 
       dateOfBirth:

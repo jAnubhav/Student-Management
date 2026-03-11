@@ -2,7 +2,6 @@ package org.anubhav.student_management.service;
 
 import org.anubhav.model.CreateParentRequest;
 import org.anubhav.model.ParentAssigned;
-import org.anubhav.model.ParentConfigured;
 import org.anubhav.model.ParentDetails;
 import org.anubhav.student_management.entity.ParentEntity;
 import org.anubhav.student_management.exception.NotFoundException;
@@ -23,8 +22,7 @@ public class ParentManagementService {
     }
 
     public ParentAssigned createParent(CreateParentRequest createParentRequest) {
-        ParentConfigured parentConfigured = mapper.toConfiguredDto(createParentRequest);
-        ParentEntity parentEntity = mapper.toEntity(parentConfigured);
+        ParentEntity parentEntity = mapper.toEntity(createParentRequest);
         return mapper.toAssignedDto(repository.save(parentEntity));
     }
 
