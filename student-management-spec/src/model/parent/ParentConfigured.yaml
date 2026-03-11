@@ -7,12 +7,18 @@ allOf:
       fatherName:
         type: string
         description: Full name of the father or male guardian of the student.
+        minLength: 3
+        maxLength: 40
+        x-minLength-message: "{fatherName.size}"
         example: "Ramesh Sharma"
 
       fatherEmail:
         type: string
         format: email
         description: Email address of the father or male guardian. Must be a valid email format.
+        minLength: 3
+        maxLength: 40
+        x-minLength-message: "{fatherEmail.size}"
         example: "ramesh.sharma@example.com"
 
       fatherPhoneNumber:
@@ -21,17 +27,25 @@ allOf:
         minLength: 10
         maxLength: 10
         pattern: '^[0-9]{10}$'
+        x-minLength-message: "{fatherPhoneNumber.size}"
+        x-pattern-message: "{fatherPhoneNumber.pattern}"
         example: "9876543211"
 
       motherName:
         type: string
         description: Full name of the mother or female guardian of the student.
+        minLength: 3
+        maxLength: 40
+        x-minLength-message: "{motherName.size}"
         example: "Sunita Sharma"
 
       motherEmail:
         type: string
         format: email
         description: Email address of the mother or female guardian. Must be a valid email format.
+        minLength: 3
+        maxLength: 40
+        x-minLength-message: "{motherEmail.size}"
         example: "sunita.sharma@example.com"
 
       motherPhoneNumber:
@@ -40,6 +54,8 @@ allOf:
         minLength: 10
         maxLength: 10
         pattern: '^[0-9]{10}$'
+        x-minLength-message: "{motherPhoneNumber.size}"
+        x-pattern-message: "{motherPhoneNumber.pattern}"
         example: "9876543212"
 
 example:

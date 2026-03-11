@@ -7,17 +7,26 @@ allOf:
       firstName:
         type: string
         description: First name of the student.
+        minLength: 3
+        maxLength: 20
+        x-minLength-message: "{firstName.size}"
         example: "Arjun"
 
       lastName:
         type: string
         description: Last name of the student.
+        minLength: 3
+        maxLength: 20
+        x-minLength-message: "{lastName.size}"
         example: "Sharma"
 
       email:
         type: string
         format: email
         description: Email address of the student. Must be a valid email format.
+        minLength: 3
+        maxLength: 40
+        x-minLength-message: "{email.size}"
         example: "arjun.sharma@example.com"
 
       phoneNumber:
@@ -26,6 +35,8 @@ allOf:
         minLength: 10
         maxLength: 10
         pattern: '^[0-9]{10}$'
+        x-minLength-message: "{phoneNumber.size}"
+        x-pattern-message: "{phoneNumber.pattern}"
         example: "9876543210"
 
       department:
@@ -48,6 +59,8 @@ allOf:
         minLength: 1
         maxLength: 1
         pattern: '^[MFO]$'
+        x-minLength-message: "{gender.size}"
+        x-pattern-message: "{gender.pattern}"
         example: "M"
 
       dateOfBirth:

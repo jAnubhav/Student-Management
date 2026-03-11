@@ -22,6 +22,9 @@ allOf:
         description: Unique identifier of the parent associated with the student.
         minLength: 6
         maxLength: 6
+        pattern: '^[0-9]{6}$'
+        x-minLength-message: "{parentId.size}"
+        x-pattern-message: "{parentId.pattern}"
         example: "220001"
 
 example:

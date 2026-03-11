@@ -11,6 +11,8 @@ components:
           minLength: 6
           maxLength: 6
           pattern: '^[0-9]{6}$'
+          x-minLength-message: "{parentId.size}"
+          x-pattern-message: "{parentId.pattern}"
           description: Unique identifier assigned to the parent.
           example: "220001"
 

@@ -5,6 +5,19 @@ allOf:
   - $ref: './StudentAssigned.yaml#/components/schemas/StudentResponseMetadata'
   - $ref: './StudentConfigured.yaml'
   - type: object
+    required:
+      - firstName
+      - lastName
+      - email
+      - phoneNumber
+      - department
+      - gender
+      - dateOfBirth
+      - parentId
+      - address
+      - city
+      - state
+      - zipcode
     properties:
       parentDetails:
         description: Contains the details of the parent or guardian associated with the student, including their personal details and contact information.

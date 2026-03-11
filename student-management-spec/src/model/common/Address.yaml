@@ -5,16 +5,25 @@ properties:
   address:
     type: string
     description: Street address including house number, building name, or street details.
+    minLength: 3
+    maxLength: 100
+    x-minLength-message: "{address.size}"
     example: "Flat No. 12B, Sri Lakshmi Apartments, MG Road"
 
   city:
     type: string
     description: Name of the city where the address is located.
+    minLength: 3
+    maxLength: 40
+    x-minLength-message: "{city.size}"
     example: "Chennai"
 
   state:
     type: string
     description: Name of the state or union territory.
+    minLength: 3
+    maxLength: 40
+    x-minLength-message: "{state.size}"
     example: "Tamil Nadu"
 
   zipcode:
@@ -23,6 +32,8 @@ properties:
     pattern: '^[0-9]{6}$'
     minLength: 6
     maxLength: 6
+    x-minLength-message: "{zipcode.size}"
+    x-pattern-message: "{zipcode.pattern}"
     example: "600034"
 
 example:
