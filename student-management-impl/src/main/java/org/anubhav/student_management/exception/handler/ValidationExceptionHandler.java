@@ -2,13 +2,12 @@ package org.anubhav.student_management.exception.handler;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
+import java.util.List;
 import org.anubhav.model.ErrorDetail;
 import org.anubhav.model.FailureResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import java.util.List;
 
 @RestControllerAdvice
 public class ValidationExceptionHandler {
