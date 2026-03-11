@@ -4,6 +4,7 @@ import org.anubhav.model.CreateStudentRequest;
 import org.anubhav.model.ParentDetails;
 import org.anubhav.model.StudentAssigned;
 import org.anubhav.model.StudentDetails;
+import org.anubhav.model.UpdateStudentRequest;
 import org.anubhav.student_management.exception.DependencyUnavailableException;
 import org.anubhav.student_management.entity.StudentEntity;
 import org.anubhav.student_management.exception.NotFoundException;
@@ -47,6 +48,20 @@ public class StudentManagementService {
         ParentDetails parentDetails = parentManagementService.getParentById(parentId);
 
         return mapper.toDto(studentEntity).parentDetails(parentDetails);
+    }
+
+    public StudentAssigned updateStudentById(String enrollmentNumber, UpdateStudentRequest updateStudentRequest) {
+        ensureDependenciesAvailable();
+
+        StudentEntity existingStudentEntity = repository.findById(enrollmentNumber).orElseThrow(
+                () -> new NotFoundException(
+                        "Student Details not found for Enrollment Number: " + enrollmentNumber,
+                        Constants.ENROLLMENT_NUMBER_PATH_VARIABLE_NAME
+                )
+        );
+
+        mapper.updateStudentFromDto(updateStudentRequest, existingStudentEntity);
+        return mapper.toAssignedDto(repository.save(existingStudentEntity));
     }
 
     private void ensureDependenciesAvailable() {

@@ -3,6 +3,7 @@ package org.anubhav.student_management.service;
 import org.anubhav.model.CreateParentRequest;
 import org.anubhav.model.ParentAssigned;
 import org.anubhav.model.ParentDetails;
+import org.anubhav.model.UpdateParentRequest;
 import org.anubhav.student_management.exception.DependencyUnavailableException;
 import org.anubhav.student_management.entity.ParentEntity;
 import org.anubhav.student_management.exception.NotFoundException;
@@ -39,6 +40,20 @@ public class ParentManagementService {
                 )
         );
         return mapper.toDto(parentEntity);
+    }
+
+    public ParentAssigned updateParentById(String parentId, UpdateParentRequest updateParentRequest) {
+        ensureDependenciesAvailable();
+
+        ParentEntity existingParentEntity = repository.findById(parentId).orElseThrow(
+                () -> new NotFoundException(
+                        "Parent Details not found for Parent ID: " + parentId,
+                        Constants.PARENT_ID_PATH_VARIABLE_NAME
+                )
+        );
+
+        mapper.updateParentFromDto(updateParentRequest, existingParentEntity);
+        return mapper.toAssignedDto(repository.save(existingParentEntity));
     }
 
     private void ensureDependenciesAvailable() {

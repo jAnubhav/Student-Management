@@ -50,7 +50,12 @@ public class StudentManagementController implements StudentManagementInterface {
             UpdateStudentRequest updateStudentRequest) {
         ensureDependenciesAvailable();
 
-        return null;
+        StudentAssigned studentAssigned = service.updateStudentById(enrollmentNumber, updateStudentRequest);
+        SuccessStudentResponse response = new SuccessStudentResponse(
+                SuccessStudentResponse.RequestStatusEnum.SUCCESS,
+                studentAssigned
+        );
+        return ResponseEntity.ok(response);
     }
 
     private void ensureDependenciesAvailable() {

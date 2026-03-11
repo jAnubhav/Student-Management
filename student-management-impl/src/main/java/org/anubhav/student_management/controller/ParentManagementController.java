@@ -50,7 +50,12 @@ public class ParentManagementController implements ParentManagementInterface {
             UpdateParentRequest updateParentRequest) {
         ensureDependenciesAvailable();
 
-        return null;
+        ParentAssigned parentDetails = service.updateParentById(parentId, updateParentRequest);
+        SuccessParentResponse response = new SuccessParentResponse(
+                SuccessParentResponse.RequestStatusEnum.SUCCESS,
+                parentDetails
+        );
+        return ResponseEntity.ok(response);
     }
 
     private void ensureDependenciesAvailable() {
