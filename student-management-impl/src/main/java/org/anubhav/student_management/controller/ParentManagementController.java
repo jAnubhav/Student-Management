@@ -12,10 +12,10 @@ import org.anubhav.student_management.service.ParentManagementService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
 /**
  * REST controller for parent endpoints.
  */
+@RestController
 public class ParentManagementController implements ParentManagementInterface {
 
     private final ParentManagementService service;
@@ -27,7 +27,8 @@ public class ParentManagementController implements ParentManagementInterface {
     /**
      * Creates a parent and returns assigned parent metadata.
      *
-     * @param createParentRequest validated create-parent payload
+     * @param createParentRequest
+     *            validated create-parent payload
      * @return successful response containing assigned parent details
      */
     @Override
@@ -45,7 +46,8 @@ public class ParentManagementController implements ParentManagementInterface {
     /**
      * Retrieves parent details by parent ID.
      *
-     * @param parentId unique parent identifier
+     * @param parentId
+     *            unique parent identifier
      * @return successful response containing full parent details
      */
     @Override
@@ -63,8 +65,10 @@ public class ParentManagementController implements ParentManagementInterface {
     /**
      * Updates parent details by parent ID.
      *
-     * @param parentId unique parent identifier
-     * @param updateParentRequest partial update payload
+     * @param parentId
+     *            unique parent identifier
+     * @param updateParentRequest
+     *            partial update payload
      * @return successful response containing assigned parent metadata
      */
     @Override

@@ -12,10 +12,10 @@ import org.anubhav.student_management.service.StudentManagementService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
 /**
  * REST controller for student endpoints.
  */
+@RestController
 public class StudentManagementController implements StudentManagementInterface {
 
     private final StudentManagementService service;
@@ -27,7 +27,8 @@ public class StudentManagementController implements StudentManagementInterface {
     /**
      * Creates a student and returns assigned enrollment metadata.
      *
-     * @param createStudentRequest validated create-student payload
+     * @param createStudentRequest
+     *            validated create-student payload
      * @return successful response containing assigned student details
      */
     @Override
@@ -45,7 +46,8 @@ public class StudentManagementController implements StudentManagementInterface {
     /**
      * Retrieves student details by enrollment number.
      *
-     * @param enrollmentNumber unique student enrollment identifier
+     * @param enrollmentNumber
+     *            unique student enrollment identifier
      * @return successful response containing full student details
      */
     @Override
@@ -63,8 +65,10 @@ public class StudentManagementController implements StudentManagementInterface {
     /**
      * Updates student details by enrollment number.
      *
-     * @param enrollmentNumber unique student enrollment identifier
-     * @param updateStudentRequest partial update payload
+     * @param enrollmentNumber
+     *            unique student enrollment identifier
+     * @param updateStudentRequest
+     *            partial update payload
      * @return successful response containing assigned student metadata
      */
     @Override

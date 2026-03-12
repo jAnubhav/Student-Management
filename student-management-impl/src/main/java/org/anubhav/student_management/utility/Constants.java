@@ -2,10 +2,10 @@ package org.anubhav.student_management.utility;
 
 import lombok.experimental.UtilityClass;
 
-@UtilityClass
 /**
  * Shared constant keys used in API validation and error responses.
  */
+@UtilityClass
 public class Constants {
 
     public static final String ENROLLMENT_NUMBER_PATH_VARIABLE_NAME = "enrollmentNumber";

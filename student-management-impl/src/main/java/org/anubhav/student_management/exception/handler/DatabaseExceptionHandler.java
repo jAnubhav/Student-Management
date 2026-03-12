@@ -16,19 +16,20 @@ import org.springframework.transaction.TransactionSystemException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice
 /**
  * Handles persistence-layer and database availability failures.
  */
+@RestControllerAdvice
 public class DatabaseExceptionHandler {
 
-    @ExceptionHandler({DuplicateKeyException.class, DataIntegrityViolationException.class})
     /**
      * Converts data-integrity conflicts into a standardized 409 response.
      *
-     * @param ex source data-access exception
+     * @param ex
+     *            source data-access exception
      * @return failure response with conflict error type
      */
+    @ExceptionHandler({DuplicateKeyException.class, DataIntegrityViolationException.class})
     public ResponseEntity<FailureResponse> handleConflictExceptions(DataAccessException ex) {
         ErrorDetail error = new ErrorDetail(
                 ErrorDetail.TypeEnum.CONFLICT,
@@ -38,14 +39,16 @@ public class DatabaseExceptionHandler {
                 .body(new FailureResponse(FailureResponse.RequestStatusEnum.FAILURE, List.of(error)));
     }
 
-    @ExceptionHandler({CannotGetJdbcConnectionException.class, DataAccessResourceFailureException.class,
-            CannotAcquireLockException.class, QueryTimeoutException.class, TransactionSystemException.class})
     /**
-     * Converts transient database outages/timeouts into a standardized 503 response.
+     * Converts transient database outages/timeouts into a standardized 503
+     * response.
      *
-     * @param ex source exception indicating DB unavailability
+     * @param ex
+     *            source exception indicating DB unavailability
      * @return failure response with service-unavailable error type
      */
+    @ExceptionHandler({CannotGetJdbcConnectionException.class, DataAccessResourceFailureException.class,
+            CannotAcquireLockException.class, QueryTimeoutException.class, TransactionSystemException.class})
     public ResponseEntity<FailureResponse> handleDatabaseAvailabilityExceptions(Exception ex) {
         ErrorDetail error = new ErrorDetail(
                 ErrorDetail.TypeEnum.SERVICE_UNAVAILABLE,

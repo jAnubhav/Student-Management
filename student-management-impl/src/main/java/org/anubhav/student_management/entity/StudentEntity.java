@@ -13,13 +13,13 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 
+/**
+ * JPA entity representing a student record.
+ */
 @Entity
 @Table(name = "student")
 @Data
 @EqualsAndHashCode(callSuper = true)
-/**
- * JPA entity representing a student record.
- */
 public class StudentEntity extends BaseEntity {
 
     @Id
@@ -58,10 +58,10 @@ public class StudentEntity extends BaseEntity {
     @Column(name = "parent_id", nullable = false)
     private Integer parentId;
 
-    @PrePersist
     /**
      * Sets the initial lifecycle status for newly created records.
      */
+    @PrePersist
     public void setDefaultStatus() {
         status = "ACTIVE";
     }

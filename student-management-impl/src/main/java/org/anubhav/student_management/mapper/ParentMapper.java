@@ -10,16 +10,17 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
-@Mapper(componentModel = "spring")
 /**
  * Maps parent API models to persistence entities and back.
  */
+@Mapper(componentModel = "spring")
 public interface ParentMapper {
 
     /**
      * Converts a parent entity into a detailed API response model.
      *
-     * @param entity source parent entity
+     * @param entity
+     *            source parent entity
      * @return mapped parent details model
      */
     ParentDetails toDto(ParentEntity entity);
@@ -27,7 +28,8 @@ public interface ParentMapper {
     /**
      * Converts a create-parent request payload into a persistence entity.
      *
-     * @param request source create request
+     * @param request
+     *            source create request
      * @return mapped parent entity
      */
     ParentEntity toEntity(CreateParentRequest request);
@@ -35,18 +37,21 @@ public interface ParentMapper {
     /**
      * Converts a parent entity into assigned-id metadata.
      *
-     * @param entity source parent entity
+     * @param entity
+     *            source parent entity
      * @return mapped parent assigned model
      */
     ParentAssigned toAssignedDto(ParentEntity entity);
 
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     /**
      * Applies non-null update fields onto an existing parent entity.
      *
-     * @param dto update request payload
-     * @param entity target entity to mutate
+     * @param dto
+     *            update request payload
+     * @param entity
+     *            target entity to mutate
      */
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateParentFromDto(UpdateParentRequest dto, @MappingTarget ParentEntity entity);
 
 }

@@ -13,10 +13,10 @@ import org.anubhav.student_management.repository.StudentRepository;
 import org.anubhav.student_management.utility.Constants;
 import org.springframework.stereotype.Service;
 
-@Service
 /**
  * Business service for student create/read/update operations.
  */
+@Service
 public class StudentManagementService {
 
     private final ParentManagementService parentManagementService;
@@ -33,7 +33,8 @@ public class StudentManagementService {
     /**
      * Creates a student record from request data.
      *
-     * @param createStudentRequest request payload
+     * @param createStudentRequest
+     *            request payload
      * @return assigned student metadata
      */
     public StudentAssigned createStudent(CreateStudentRequest createStudentRequest) {
@@ -46,7 +47,8 @@ public class StudentManagementService {
     /**
      * Fetches a student record by enrollment number and enriches parent details.
      *
-     * @param enrollmentNumber student enrollment identifier
+     * @param enrollmentNumber
+     *            student enrollment identifier
      * @return complete student details
      */
     public StudentDetails getStudentById(String enrollmentNumber) {
@@ -68,8 +70,10 @@ public class StudentManagementService {
     /**
      * Updates an existing student record with partial data.
      *
-     * @param enrollmentNumber student enrollment identifier
-     * @param updateStudentRequest patch payload
+     * @param enrollmentNumber
+     *            student enrollment identifier
+     * @param updateStudentRequest
+     *            patch payload
      * @return assigned student metadata for the updated record
      */
     public StudentAssigned updateStudentById(String enrollmentNumber, UpdateStudentRequest updateStudentRequest) {

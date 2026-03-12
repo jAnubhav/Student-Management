@@ -9,13 +9,13 @@ import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * JPA entity representing a parent/guardian record.
+ */
 @Entity
 @Table(name = "parent")
 @Data
 @EqualsAndHashCode(callSuper = true)
-/**
- * JPA entity representing a parent/guardian record.
- */
 public class ParentEntity extends BaseEntity {
 
     @Id

@@ -12,10 +12,10 @@ import org.anubhav.student_management.repository.ParentRepository;
 import org.anubhav.student_management.utility.Constants;
 import org.springframework.stereotype.Service;
 
-@Service
 /**
  * Business service for parent create/read/update operations.
  */
+@Service
 public class ParentManagementService {
 
     private final ParentRepository repository;
@@ -29,7 +29,8 @@ public class ParentManagementService {
     /**
      * Creates a parent record from request data.
      *
-     * @param createParentRequest request payload
+     * @param createParentRequest
+     *            request payload
      * @return assigned parent metadata
      */
     public ParentAssigned createParent(CreateParentRequest createParentRequest) {
@@ -42,7 +43,8 @@ public class ParentManagementService {
     /**
      * Fetches a parent record by ID.
      *
-     * @param parentId parent identifier
+     * @param parentId
+     *            parent identifier
      * @return complete parent details
      */
     public ParentDetails getParentById(String parentId) {
@@ -60,8 +62,10 @@ public class ParentManagementService {
     /**
      * Updates an existing parent record with partial data.
      *
-     * @param parentId parent identifier
-     * @param updateParentRequest patch payload
+     * @param parentId
+     *            parent identifier
+     * @param updateParentRequest
+     *            patch payload
      * @return assigned parent metadata for the updated record
      */
     public ParentAssigned updateParentById(String parentId, UpdateParentRequest updateParentRequest) {

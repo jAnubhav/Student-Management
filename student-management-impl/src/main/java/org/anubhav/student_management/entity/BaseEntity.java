@@ -6,11 +6,11 @@ import java.util.Date;
 import lombok.Data;
 import org.hibernate.annotations.UpdateTimestamp;
 
-@MappedSuperclass
-@Data
 /**
  * Base persistence fields shared by domain entities.
  */
+@MappedSuperclass
+@Data
 public class BaseEntity {
 
     @Column(length = 100)
