@@ -53,13 +53,7 @@ public class StudentManagementService {
      */
     public StudentDetails getStudentById(String enrollmentNumber) {
         ensureDependenciesAvailable();
-
-        StudentEntity studentEntity = repository.findById(enrollmentNumber).orElseThrow(
-                () -> new NotFoundException(
-                        "Student Details not found for Enrollment Number: " + enrollmentNumber,
-                        Constants.ENROLLMENT_NUMBER_PATH_VARIABLE_NAME
-                )
-        );
+        StudentEntity studentEntity = getStudentEntity(enrollmentNumber);
 
         String parentId = String.valueOf(studentEntity.getParentId());
         ParentDetails parentDetails = parentManagementService.getParentById(parentId);
@@ -78,13 +72,7 @@ public class StudentManagementService {
      */
     public StudentAssigned updateStudentById(String enrollmentNumber, UpdateStudentRequest updateStudentRequest) {
         ensureDependenciesAvailable();
-
-        StudentEntity existingStudentEntity = repository.findById(enrollmentNumber).orElseThrow(
-                () -> new NotFoundException(
-                        "Student Details not found for Enrollment Number: " + enrollmentNumber,
-                        Constants.ENROLLMENT_NUMBER_PATH_VARIABLE_NAME
-                )
-        );
+        StudentEntity existingStudentEntity = getStudentEntity(enrollmentNumber);
 
         mapper.updateStudentFromDto(updateStudentRequest, existingStudentEntity);
         return mapper.toAssignedDto(repository.save(existingStudentEntity));
@@ -103,6 +91,23 @@ public class StudentManagementService {
         if (mapper == null) {
             throw new DependencyUnavailableException("Student mapper is unavailable.");
         }
+    }
+
+    /**
+     * Gets the Student Entity for an Enrollment Number.
+     *
+     * @param enrollmentNumber
+     *            student enrollment identifier
+     * @return student entity for the given enrollment number or throws
+     *         NotFoundException if not found
+     */
+    private StudentEntity getStudentEntity(String enrollmentNumber) {
+        return repository.findById(enrollmentNumber).orElseThrow(
+                () -> new NotFoundException(
+                        "Student Details not found for Enrollment Number: " + enrollmentNumber,
+                        Constants.ENROLLMENT_NUMBER_PATH_VARIABLE_NAME.toString()
+                )
+        );
     }
 
 }

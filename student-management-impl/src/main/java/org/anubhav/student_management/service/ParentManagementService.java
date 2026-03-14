@@ -50,12 +50,7 @@ public class ParentManagementService {
     public ParentDetails getParentById(String parentId) {
         ensureDependenciesAvailable();
 
-        ParentEntity parentEntity = repository.findById(parentId).orElseThrow(
-                () -> new NotFoundException(
-                        "Parent Details not found for Parent ID: " + parentId,
-                        Constants.PARENT_ID_PATH_VARIABLE_NAME
-                )
-        );
+        ParentEntity parentEntity = getParentEntity(parentId);
         return mapper.toDto(parentEntity);
     }
 
@@ -70,13 +65,7 @@ public class ParentManagementService {
      */
     public ParentAssigned updateParentById(String parentId, UpdateParentRequest updateParentRequest) {
         ensureDependenciesAvailable();
-
-        ParentEntity existingParentEntity = repository.findById(parentId).orElseThrow(
-                () -> new NotFoundException(
-                        "Parent Details not found for Parent ID: " + parentId,
-                        Constants.PARENT_ID_PATH_VARIABLE_NAME
-                )
-        );
+        ParentEntity existingParentEntity = getParentEntity(parentId);
 
         mapper.updateParentFromDto(updateParentRequest, existingParentEntity);
         return mapper.toAssignedDto(repository.save(existingParentEntity));
@@ -92,6 +81,23 @@ public class ParentManagementService {
         if (mapper == null) {
             throw new DependencyUnavailableException("Parent mapper is unavailable.");
         }
+    }
+
+    /**
+     * Gets the Parent Details for a Parent ID.
+     *
+     * @param parentId
+     *            parent identifier
+     * @return parent entity for the given ID or throws NotFoundException if not
+     *         found
+     */
+    private ParentEntity getParentEntity(String parentId) {
+        return repository.findById(parentId).orElseThrow(
+                () -> new NotFoundException(
+                        "Parent Details not found for Parent ID: " + parentId,
+                        Constants.PARENT_ID_PATH_VARIABLE_NAME.toString()
+                )
+        );
     }
 
 }

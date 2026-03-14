@@ -49,7 +49,6 @@ public class ValidationExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<FailureResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         List<ErrorDetail> errors = ex.getBindingResult().getFieldErrors().stream().map(this::toErrorDetail).toList();
-
         return ResponseEntity.badRequest().body(new FailureResponse(FailureResponse.RequestStatusEnum.FAILURE, errors));
     }
 
@@ -64,7 +63,6 @@ public class ValidationExceptionHandler {
     public ResponseEntity<FailureResponse> handleNotFoundException(NotFoundException ex) {
         ErrorDetail errorDetail = new ErrorDetail(ErrorDetail.TypeEnum.NOT_FOUND, ex.getMessage())
                 .errorParameter(ex.getParameterName());
-
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(new FailureResponse(FailureResponse.RequestStatusEnum.FAILURE, List.of(errorDetail)));
     }

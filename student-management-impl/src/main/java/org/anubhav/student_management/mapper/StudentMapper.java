@@ -9,6 +9,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.anubhav.student_management.entity.StudentEntity;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 /**
  * Maps student API models to persistence entities and back.
@@ -52,7 +53,7 @@ public interface StudentMapper {
      * @param entity
      *            target entity to mutate
      */
-    @BeanMapping(nullValuePropertyMappingStrategy = org.mapstruct.NullValuePropertyMappingStrategy.IGNORE)
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateStudentFromDto(UpdateStudentRequest dto, @MappingTarget StudentEntity entity);
 
 }
